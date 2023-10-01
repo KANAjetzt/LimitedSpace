@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5uucgmnwqen8"]
+
+[ext_resource type="Script" path="res://cylinder_insert.gd" id="1_j6pwi"]
+[ext_resource type="PackedScene" uid="uid://4qy1dvchi7lw" path="res://assets/Cylinder_Insert.glb" id="1_j8ik0"]
+[ext_resource type="AudioStream" uid="uid://b3o4i1t1f75ba" path="res://assets/sound/sfx/wood0.ogg" id="2_g0t8k"]
+[ext_resource type="AudioStream" uid="uid://bml06bwe8es3g" path="res://assets/sound/sfx/wood1.ogg" id="3_jexc8"]
+[ext_resource type="AudioStream" uid="uid://63tk5p110ytw" path="res://assets/sound/sfx/wood2.ogg" id="4_0301e"]
+[ext_resource type="AudioStream" uid="uid://dn3pnfeto8n4i" path="res://assets/sound/sfx/wood3.ogg" id="5_pe2db"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qv5r0"]
+height = 0.623484
+radius = 0.321612
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_gd8rh"]
+albedo_color = Color(0.290196, 0.211765, 0.00392157, 1)
+emission_enabled = true
+emission = Color(0.290196, 0.211765, 0.00392157, 1)
+
+[node name="Cylinder_Insert" type="RigidBody3D"]
+mass = 0.25
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_j6pwi")
+sfx = Array[AudioStream]([ExtResource("2_g0t8k"), ExtResource("3_jexc8"), ExtResource("4_0301e"), ExtResource("5_pe2db")])
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.303819, 0)
+shape = SubResource("CylinderShape3D_qv5r0")
+
+[node name="Cylinder_Insert" parent="." instance=ExtResource("1_j8ik0")]
+
+[node name="Cylinder_Insert2" parent="Cylinder_Insert" index="0"]
+material_override = SubResource("ORMMaterial3D_gd8rh")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_g0t8k")
+volume_db = 40.0
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+
+[editable path="Cylinder_Insert"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx7b71wcaacsy"]
+
+[ext_resource type="Script" path="res://CursorPoint.gd" id="1_rlfui"]
+
+[node name="CursorPoint" type="Node3D"]
+script = ExtResource("1_rlfui")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 3.053
+omni_range = 0.597778
